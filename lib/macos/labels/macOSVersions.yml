@@ -1,0 +1,25 @@
+- name: macOS 12 (Monterey)
+  description: Macs running macOS 12
+  query: SELECT * FROM os_version WHERE major = 12 and name = "macOS";
+  label_membership_type: dynamic
+  platform: darwin
+- name: macOS 13 (Ventura)
+  description: Macs running macOS 13
+  query: SELECT * FROM os_version WHERE major = 13 and name = "macOS";
+  label_membership_type: dynamic
+  platform: darwin
+- name: macOS 14 (Sonoma)
+  description: Macs running macOS 14
+  query: SELECT * FROM os_version WHERE major = 14 and name = "macOS";
+  label_membership_type: dynamic
+  platform: darwin
+- name: macOS 15 (Sequoia)
+  description: Macs running macOS 15
+  query: SELECT * FROM os_version WHERE major = 15 and name = "macOS";
+  label_membership_type: dynamic
+  platform: darwin
+- name: macOS 26 (Tahoe)
+  description: Macs running macOS 26
+  query: SELECT * FROM os_version WHERE ( major = 26 OR major = 16 ) and name = "macOS";
+  label_membership_type: dynamic
+  platform: darwin

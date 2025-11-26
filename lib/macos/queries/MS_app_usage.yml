@@ -1,0 +1,22 @@
+- name: Microsoft App Usage
+  description: Displays the last open time for Microsoft Word, Excel, and PowerPoint.
+  query: |
+    SELECT 
+      *, 
+      CASE 
+        WHEN last_opened_time = -1.0 THEN "Never opened"
+        ELSE strftime('%Y-%m-%d %H:%M:%S', last_opened_time, 'unixepoch') 
+      END as LastUseDate, 
+      (SELECT username FROM users WHERE directory LIKE '/Users/%' ORDER BY uid LIMIT 1) AS primary_user   
+    FROM 
+      apps 
+    WHERE 
+      bundle_identifier IN (
+        "com.microsoft.Word", 
+        "com.microsoft.Excel", 
+        "com.microsoft.PowerPoint"
+      );
+  platform: darwin
+  interval: 604800 # runs weekly
+  observer_can_run: true
+  automations_enabled: true

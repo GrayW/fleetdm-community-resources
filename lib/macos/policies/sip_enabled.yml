@@ -1,0 +1,10 @@
+- name: SIP Enabled
+  query: |
+    SELECT 1
+    FROM sip_config
+    WHERE config_flag="sip"
+      AND enabled="1";
+  critical: true
+  description:  Checks to see if SIP is enabled.
+  resolution: No automated resolution. Ticket must be created to enable SIP.
+  platform: darwin

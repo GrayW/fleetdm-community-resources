@@ -1,0 +1,8 @@
+- name: Munki Forced Reinstall
+  query:  SELECT 1 FROM apps where bundle_identifier = "com.googlecode.munki.ManagedSoftwareCenter";
+  critical: true
+  description:  Managed Software Centre is required to be on all Macs at Thumbtack. This will ensure the app is always installed.
+  resolution: Install Munki, Middleware and put into forced run mode
+  platform: darwin
+  run_script:
+    path: ../scripts/munki_setup.sh

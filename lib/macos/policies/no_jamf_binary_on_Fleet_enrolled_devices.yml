@@ -1,0 +1,16 @@
+- name: No Jamf Binary on Fleet Enrolled Devices
+  query: |
+    SELECT 1
+    FROM mdm
+    WHERE payload_identifier = "com.fleetdm.fleet.mdm.apple"
+    AND NOT EXISTS (
+      SELECT 1
+      FROM file
+      WHERE path = "/usr/local/bin/jamf"
+    );
+  critical: true
+  description:  Checks to see if the Jamf binary is present on Fleet enrolled devices.
+  resolution: Will run a script to remove the Jamf binary.
+  platform: darwin
+  run_script:
+    path: ../scripts/removeJamf.sh

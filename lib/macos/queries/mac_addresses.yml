@@ -1,0 +1,23 @@
+- name: MAC Addresses
+  description: Gets information from endpoints to display their MAC addresses
+  query: |
+    SELECT 
+      key, 
+      subkey, 
+      UPPER(
+        SUBSTR(hex(from_base64(value)), 1, 2) || ':' || 
+        SUBSTR(hex(from_base64(value)), 3, 2) || ':' || 
+        SUBSTR(hex(from_base64(value)), 5, 2) || ':' || 
+        SUBSTR(hex(from_base64(value)), 7, 2) || ':' || 
+        SUBSTR(hex(from_base64(value)), 9, 2) || ':' || 
+        SUBSTR(hex(from_base64(value)), 11, 2)
+      ) AS mac_address, 
+      (SELECT username FROM users WHERE directory LIKE '/Users/%' ORDER BY uid LIMIT 1) AS primary_user 
+    FROM plist
+    WHERE 
+      path = '/Library/Preferences/SystemConfiguration/NetworkInterfaces.plist' 
+      AND subkey = 'IOMACAddress';
+  platform: darwin
+  interval: 86400 # runs daily
+  observer_can_run: true
+  automations_enabled: true

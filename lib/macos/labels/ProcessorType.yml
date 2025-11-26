@@ -1,0 +1,35 @@
+- name: Intel
+  description: Macs running Intel
+  query: SELECT 1 FROM system_info WHERE hardware_vendor LIKE '%Apple%' AND cpu_type LIKE 'x86%';
+  label_membership_type: dynamic
+  platform: darwin
+- name: Apple Silicon
+  description: Macs running Apple Silicon
+  query: SELECT 1 FROM system_info WHERE hardware_vendor LIKE '%Apple%' AND cpu_type LIKE 'arm64%';
+  label_membership_type: dynamic
+  platform: darwin
+- name: M5
+  description: Macs running Apple Silicon M5 Processor
+  query: SELECT 1 FROM system_info WHERE cpu_brand LIKE '%M5%';
+  label_membership_type: dynamic
+  platform: darwin
+- name: M4
+  description: Macs running Apple Silicon M4 Processor
+  query: SELECT 1 FROM system_info WHERE cpu_brand LIKE '%M4%';
+  label_membership_type: dynamic
+  platform: darwin
+- name: M3
+  description: Macs running Apple Silicon M3 Processor
+  query: SELECT 1 FROM system_info WHERE cpu_brand LIKE '%M3%';
+  label_membership_type: dynamic
+  platform: darwin
+- name: M2
+  description: Macs running Apple Silicon M2 Processor
+  query: SELECT 1 FROM system_info WHERE cpu_brand LIKE '%M2%';
+  label_membership_type: dynamic
+  platform: darwin
+- name: M1
+  description: Macs running Apple Silicon M1 Processor
+  query: SELECT 1 FROM system_info WHERE cpu_brand LIKE '%M1%';
+  label_membership_type: dynamic
+  platform: darwin
