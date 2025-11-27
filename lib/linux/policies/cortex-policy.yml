@@ -1,7 +1,7 @@
 - name: Cortex Forced Reinstall
   query:  SELECT 1 FROM deb_packages WHERE name = 'cortex-agent';
   critical: true
-  description:  Cortex XDR is our EDR solution for all endpoints at Thumbtack. XDR is required to be installed on all Linux hosts.
+  description:  Cortex XDR is our EDR solution for all endpoints at our org. XDR is required to be installed on all Linux hosts.
   resolution: Install Cortex XDR agent
   platform: linux
   install_software:
