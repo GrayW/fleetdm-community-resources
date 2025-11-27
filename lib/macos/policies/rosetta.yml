@@ -1,0 +1,10 @@
+- name: Rosetta 2 Installed
+  query: select 1 from package_install_history where name = "RosettaUpdateAuto" limit 5;
+  critical: true
+  description: Many software titles are limited to Intel support. To work on Apple Silicon requires Rosetta 2 to be installed.
+  resolution: Run the rosetta installer...  /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+  platform: darwin
+  run_script:
+    path: ../scripts/rosetta.sh
+  labels_include_any:
+    - Apple Silicon

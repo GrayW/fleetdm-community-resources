@@ -1,0 +1,8 @@
+- name: Jamf Binary Installed
+  description: Devices with the Jamf binary installed.
+  query: |
+    SELECT 1
+    FROM file
+    WHERE path="/usr/local/jamf/bin/jamf";
+  label_membership_type: dynamic
+  platform: darwin

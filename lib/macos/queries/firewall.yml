@@ -1,0 +1,17 @@
+- name: Firewall Info
+  description: Gets information about Endpoint Firewall
+  query: |
+    SELECT 
+      CASE 
+        WHEN global_state = 1 THEN 'Enabled with exceptions' 
+        WHEN global_state = 2 THEN 'Configured to block all incoming connections' 
+        WHEN global_state = 0 THEN 'Unknown' 
+        ELSE 'Invalid state' 
+      END AS firewall_status, 
+      global_state, 
+    (SELECT username FROM users WHERE directory LIKE '/Users/%' ORDER BY uid LIMIT 1) AS primary_user 
+    FROM alf;
+  platform: darwin
+  interval: 3600 # runs hourly
+  observer_can_run: true
+  automations_enabled: true

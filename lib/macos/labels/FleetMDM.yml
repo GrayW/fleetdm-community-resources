@@ -1,0 +1,34 @@
+- name: FleetMDM
+  description: Macs enrolled in FleetDM's MDM
+  query: |
+    SELECT 1
+    FROM mdm
+    WHERE payload_identifier = "com.fleetdm.fleet.mdm.apple";
+  label_membership_type: dynamic
+  platform: darwin
+- name: Non-FleetMDM
+  description: Macs not enrolled in FleetDM's MDM
+  query: |
+    SELECT 1
+    FROM mdm
+    WHERE payload_identifier != "com.fleetdm.fleet.mdm.apple";
+  label_membership_type: dynamic
+  platform: darwin
+- name: Manual Enrollment
+  description: Macs with a manual enrollment in FleetDM's MDM
+  query: |
+    SELECT 1
+    FROM mdm
+    WHERE payload_identifier = "com.fleetdm.fleet.mdm.apple"
+      AND dep_capable="false";
+  label_membership_type: dynamic
+  platform: darwin
+- name: Automated Device Enrollment
+  description: Macs with an automated enrollment in FleetDM's MDM
+  query: |
+    SELECT 1
+    FROM mdm
+    WHERE payload_identifier = "com.fleetdm.fleet.mdm.apple"
+      AND dep_capable="true";
+  label_membership_type: dynamic
+  platform: darwin

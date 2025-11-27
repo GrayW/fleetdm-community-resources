@@ -1,0 +1,12 @@
+- name: MDM Profile Valid For More than 14 Days
+  query: |
+    SELECT 1 
+    FROM certificates 
+    WHERE common_name = "Fleet Identity" 
+      AND not_valid_after > (strftime('%s','now') + 14 * 86400);
+  critical: true
+  description:  Checks to see if the MDM profile is valid for more than 14 days.
+  resolution: MDM will need to be re-enrolled.
+  platform: darwin
+  labels_include_any:
+    - FleetMDM

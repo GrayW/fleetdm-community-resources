@@ -1,0 +1,13 @@
+- name: Application Level Firewall Enabled
+  query: |
+    SELECT 1
+    FROM alf
+    WHERE global_state=1;
+  critical: true
+  description:  Checks to see if the application level firewall is enabled.
+  resolution: Run the enable firewall script.
+  run_script:
+    path: ../scripts/enable-macos-firewall.sh
+  platform: darwin
+  labels_exclude_any:
+    - Non-FleetMDM

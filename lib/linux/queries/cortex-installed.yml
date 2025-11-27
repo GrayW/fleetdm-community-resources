@@ -1,0 +1,7 @@
+- name: Cortex Installed
+  description: Is Cortex XDR agent installed
+  query: SELECT * FROM deb_packages WHERE name = 'cortex-agent';
+  platform: linux
+  interval: 7200 # runs hourly
+  observer_can_run: true
+  automations_enabled: true

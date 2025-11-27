@@ -1,0 +1,5 @@
+- name: Cortex Installed
+  description: Linux machines running Cortex
+  query:  SELECT 1 FROM deb_packages WHERE name = 'cortex-agent';
+  label_membership_type: dynamic
+  platform: linux
