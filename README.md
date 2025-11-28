@@ -24,16 +24,14 @@ This repository is dedicated to community created:
 ---
 
 ## 📂 Repository Structure
+```
 fleetdm-community-resources/
 │
-├── policies/          # Policies for Fleet
-│
-├── queries/           # Queries for Fleet
-│
-├── scripts/           # Scripts for Fleet
-│
-└── README.md          # This file
-
+├── linux/
+├── macos/
+├── windows/
+└── README.md
+```
 
 ---
 
