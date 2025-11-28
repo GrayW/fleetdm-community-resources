@@ -44,9 +44,10 @@ We welcome contributions! Here’s how you can help:
 3. Ensure your PR follows the [naming conventions](#naming-conventions).
 
 ### Types of Contributions
-- **Policies**: Add or update policies in the `policies/` folder.
-- **Queries**: Contribute queries in the `queries/` folder.
-- **Scripts**: Share useful scripts in the `scripts/` folder.
+- **Policies**: Add or update policies in the `platform/policies/` folder.
+- **Queries**: Contribute queries in the `platform/queries/` folder.
+- **Scripts**: Share useful scripts in the `platform/scripts/` folder.
+- **Labels**: Share useful labels in the `platform/labels/` folder.
 
 ### Review Process
 - All contributions will be reviewed by maintainers.
