@@ -1,0 +1,13 @@
+- name: Zoom Room Mac
+  description: |
+    Macs running as a Zoom Rooms compute appliance (i.e. they have the
+    Zoom Rooms PKG installed, which lands at /Applications/ZoomPresence.app).
+    Useful as the scope for kiosk-specific MDM profiles, software install
+    rules, and policies that should only target compute-side Zoom Rooms
+    (not the Mac of an end-user who happens to have the Zoom client).
+  query: |
+    SELECT 1
+    FROM apps
+    WHERE bundle_identifier = 'us.zoom.ZoomPresence';
+  label_membership_type: dynamic
+  platform: darwin

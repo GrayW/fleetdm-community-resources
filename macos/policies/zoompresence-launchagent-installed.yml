@@ -1,0 +1,25 @@
+- name: ZoomPresence Auto-Start LaunchAgent Installed
+  query: |
+    SELECT 1
+    FROM launchd
+    WHERE path = '/Library/LaunchAgents/us.zoom.ZoomPresence.plist'
+      AND program_arguments LIKE '%/Applications/ZoomPresence.app/Contents/MacOS/ZoomPresence%';
+  critical: true
+  description: |
+    Verifies that /Library/LaunchAgents/us.zoom.ZoomPresence.plist exists
+    and points at the ZoomPresence binary. The Zoom Rooms PKG installer
+    does NOT register a login item, so without this LaunchAgent the
+    kiosk auto-logs in to a Finder desktop and ZoomPresence.app never
+    starts. A kiosk that fails this policy is effectively offline as a
+    Zoom Room until the LaunchAgent is restored.
+  resolution: |
+    Re-run the Zoom Rooms setup script (macos/scripts/zoom-rooms-mac-setup.sh
+    in this repo), or manually install the LaunchAgent: write the plist
+    to /Library/LaunchAgents/us.zoom.ZoomPresence.plist, chmod 644, chown
+    root:wheel, then `launchctl bootstrap gui/$(id -u $(stat -f %Su /dev/console))
+    /Library/LaunchAgents/us.zoom.ZoomPresence.plist`.
+  platform: darwin
+  run_script:
+    path: ../scripts/zoom-rooms-mac-setup.sh
+  labels_include_any:
+    - Zoom Room Mac
