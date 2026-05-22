@@ -1,0 +1,23 @@
+- name: Zoom Rooms (ZoomPresence) Version
+  description: |
+    Reports the installed Zoom Rooms app version, bundle path, and last-
+    opened time for every Mac that has /Applications/ZoomPresence.app.
+    Useful for tracking Zoom Rooms upgrade compliance across a fleet of
+    kiosks, and for confirming the app has actually launched recently
+    (last_opened_time == -1 means it has never launched, often a sign
+    of a missing ZoomPresence LaunchAgent).
+  query: |
+    SELECT
+      bundle_short_version AS version,
+      bundle_version AS build,
+      path AS bundle_path,
+      CASE
+        WHEN last_opened_time = -1.0 THEN 'Never opened'
+        ELSE strftime('%Y-%m-%d %H:%M:%S', last_opened_time, 'unixepoch')
+      END AS last_opened
+    FROM apps
+    WHERE bundle_identifier = 'us.zoom.ZoomPresence';
+  platform: darwin
+  interval: 86400 # runs daily
+  observer_can_run: true
+  automations_enabled: true

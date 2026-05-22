@@ -1,0 +1,22 @@
+- name: Zoom Rooms Kiosk User Exists
+  query: |
+    SELECT 1
+    FROM users
+    WHERE username = 'zoomroom';
+  description: |
+    Verifies that the local kiosk admin user (default `zoomroom`) exists.
+    This is the account that ZoomPresence.app runs under after auto-
+    login. If the user is missing, the kiosk will land on the login
+    window instead of an active Zoom Room, and ZoomPresence will not
+    auto-start.
+
+    Note: if you customized KIOSK_USERNAME in zoom-rooms-mac-setup.sh
+    to something other than `zoomroom`, update the username comparison
+    in the query above to match.
+  resolution: |
+    Re-run the Zoom Rooms setup script (macos/scripts/zoom-rooms-mac-setup.sh
+    in this repo). The script is idempotent — it will skip the mkuser
+    invocation if the account already exists, and create it if it doesn't.
+  platform: darwin
+  labels_include_any:
+    - Zoom Room Mac

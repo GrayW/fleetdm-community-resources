@@ -1,0 +1,16 @@
+- name: Zoom Rooms App Installed
+  query: |
+    SELECT 1
+    FROM apps
+    WHERE bundle_identifier = 'us.zoom.ZoomPresence';
+  description: |
+    Checks that the Zoom Rooms (ZoomPresence) application is installed
+    at /Applications/ZoomPresence.app on Macs that are scoped as Zoom
+    Rooms compute appliances.
+  resolution: |
+    Reinstall the Zoom Rooms PKG via your MDM software catalog. If your
+    MDM has a re-install / install-missing trigger, fire it; otherwise
+    re-scope the host to the Zoom Rooms software install rule.
+  platform: darwin
+  labels_include_any:
+    - Zoom Room Mac

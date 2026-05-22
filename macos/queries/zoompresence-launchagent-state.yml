@@ -1,0 +1,31 @@
+- name: ZoomPresence LaunchAgent State
+  description: |
+    Reports whether the system-wide LaunchAgent that auto-starts
+    ZoomPresence.app on every GUI login is present and pointed at the
+    expected binary path. The Zoom Rooms PKG installer does NOT register
+    a login item, so without this LaunchAgent the kiosk auto-logs in
+    to a Finder desktop and ZoomPresence never starts.
+
+    Returns one row per matching plist:
+      - label:        the LaunchAgent label (expected: us.zoom.ZoomPresence)
+      - program_args: the argv launchd will run
+      - run_at_load:  1 if RunAtLoad is true (expected: 1)
+      - keep_alive:   1 if KeepAlive is on in any form (expected: 1 for
+                      kiosks; restarts the app if it crashes)
+
+    Hosts with no row are missing the LaunchAgent entirely — pair this
+    query with the "ZoomPresence Auto-Start LaunchAgent Installed"
+    policy in this repo to alert on that case.
+  query: |
+    SELECT
+      label,
+      program_arguments AS program_args,
+      run_at_load,
+      keep_alive,
+      path
+    FROM launchd
+    WHERE path = '/Library/LaunchAgents/us.zoom.ZoomPresence.plist';
+  platform: darwin
+  interval: 3600 # runs hourly
+  observer_can_run: true
+  automations_enabled: true
